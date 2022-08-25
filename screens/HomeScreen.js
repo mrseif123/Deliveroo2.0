@@ -8,22 +8,45 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import React, { useLayoutEffect } from 'react'
-import {UserIcon, ChevronDownIcon, SearchIcon} from "react-native-heroicons/outline"
-import {useNavigation} from '@react-navigation/native'
+import React, { useEffect, useLayoutEffect } from "react";
+import {
+  UserIcon,
+  ChevronDownIcon,
+  SearchIcon,
+} from "react-native-heroicons/outline";
+import { useNavigation } from "@react-navigation/native";
 import { Svg, Path } from "react-native-svg";
 import { Searchbar, TextInput } from "react-native-paper";
 import Categories from "../components/Categories";
 import { FeaturedRow } from "../components/FeaturedRow";
+import { client } from "../sanity";
 
 function HomeScreen() {
-
-  const navigation = useNavigation()
+  const [featuredCategories, setFeaturedCategories] = React.useState([]);
+  const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
-    })
-  }, [])
+    });
+  }, []);
+
+  useEffect(() => {
+    client
+            .fetch(
+              `
+          *[_type == "featured"]{
+            ...,
+            restaurants[]->{
+              ...,
+              dishes[]->,
+        
+      },
+      }`
+      )
+      .then((data) => {
+        setFeaturedCategories(data);
+      });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container} className=" pt-5 ">
@@ -73,28 +96,16 @@ function HomeScreen() {
         <Categories />
 
         {/* Featured */}
-        <FeaturedRow
-          title="Featured"
-          description="Paid placements from our partners"
-          featuredCategory="featured"
-          id="123"
-        />
-
-        {/* Tasty Discounts */}
-        <FeaturedRow
-          title="Tasty Discounts"
-          description="Everyone's been enjpoying these juicy discounts!"
-          featuredCategory="discounts"
-          id="123"
-        />
-
-        {/* Offers Near You */}
-        <FeaturedRow
-          title="Offers Near You"
-          description="Why not support your local restaurants?"
-          featuredCategory="offers"
-          id="123"
-        />
+        {featuredCategories?.map((category, index) => {
+          return (
+            <FeaturedRow
+              key={category.id}
+              id={category._id}
+              title={category.name}
+              description={category.short_description}
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -102,9 +113,9 @@ function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: "#fff",
-  }, 
+  },
 });
 
 export default HomeScreen;

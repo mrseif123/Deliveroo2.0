@@ -3,11 +3,14 @@ import React from 'react'
 import {TouchableOpacity} from 'react-native'
 import { StarIcon } from 'react-native-heroicons/solid'
 import { Svg, Path } from "react-native-svg";
-
+import { urlFor } from '../sanity';
 const RestaurantCard = ({id, imgUrl, title, rating, genre, address, short_description, dishes, long, lat}) => {
+  console.log(title);
   return (
-    <TouchableOpacity className="bg-white mr-3 shadow-md">
-      <Image source={{ uri: imgUrl }} className="h-36 w-64 rounded-sm" />
+    <TouchableOpacity className="bg-white mr-3 shadow-md" style={{resizeMode:"contain", width:"30%", height:"100%"}}>
+      <Image style={{resizeMode:"cover",  width:"100%", resizeMode:"stretch"}} source={{ 
+        uri: urlFor(imgUrl.asset._ref).url()
+        }} className="h-36 w-64 rounded-sm" />
       <View className="px-3 pb-4">
         <Text className="font-bold text-lg pt-2">{title}</Text>
         <View className="flex-row items-center space-x-1">

@@ -1,7 +1,11 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native";
+
 export const CategoryCard = (props) => {
+
+
+
   const {title, imgUrl} = props
   return (
     <TouchableOpacity className="relative mr-2">
