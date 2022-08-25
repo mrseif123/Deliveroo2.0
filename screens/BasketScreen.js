@@ -20,7 +20,6 @@ const BasketScreen = () => {
   const dispatch = useDispatch();
   const basketTotal = useSelector(selectBasketTotal);
   useMemo(() => {
-    console.log(items);
     const groupedItems = items.reduce((results, item) => {
       (results[items.id] = results[items.id] || []).push(item);
       return results;
@@ -103,7 +102,10 @@ const BasketScreen = () => {
             </Text>
           </View>
 
-          <TouchableOpacity className="rounded-lg bg-[#00ccbb] p-4">
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Preparing")}
+            className="rounded-lg bg-[#00ccbb] p-4"
+          >
             <Text className="text-center text-white text-lg font-bold">
               Place Order
             </Text>
