@@ -22,6 +22,7 @@ export default function App() {
             options={{
               presentation: 'modal',
               headerShown: false,
+              animation:'slide_from_bottom'
             }}
             />
           </Stack.Navigator>

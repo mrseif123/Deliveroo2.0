@@ -1,27 +1,72 @@
-import { View, Text, Image, ScrollView, SafeAreaView, Platform, StyleSheet, StatusBar } from "react-native";
-import React, {useLayoutEffect} from 'react'
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  SafeAreaView,
+  Platform,
+  StyleSheet,
+  StatusBar,
+} from "react-native";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { urlFor } from '../sanity';
+import { urlFor } from "../sanity";
 import { TouchableOpacity } from "react-native";
-import { ArrowLeftIcon, StarIcon, ChevronRightIcon } from "react-native-heroicons/solid";
-import {QuestionMarkCircleIcon} from "react-native-heroicons/outline";
+import {
+  ArrowLeftIcon,
+  StarIcon,
+  ChevronRightIcon,
+} from "react-native-heroicons/solid";
+import { QuestionMarkCircleIcon } from "react-native-heroicons/outline";
 import { Svg, Path } from "react-native-svg";
 import DishRow from "../components/DishRow";
-import  BasketBar  from "../components/BasketBar";
+import BasketBar from "../components/BasketBar";
+import { basketItems } from "../features/basketSlice";
+import { setRestaurant } from "../features/restaurantSlice";
 
+import { useSelector, useDispatch } from "react-redux";
 const RestaurantScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute()
-  const { id, imgUrl, title, rating, genre, address, short_description, dishes, long, lat } = route.params
-  
+  const route = useRoute();
+  const dispatch = useDispatch();
+
+  const {
+    id,
+    imgUrl,
+    title,
+    rating,
+    genre,
+    address,
+    short_description,
+    dishes,
+    long,
+    lat,
+  } = route.params;
+  const items = useSelector(basketItems);
+
+  useEffect(() => {
+    dispatch(
+      setRestaurant({
+        id,
+        imgUrl,
+        title,
+        rating,
+        genre,
+        address,
+        short_description,
+        dishes,
+        long,
+        lat,
+      })
+    );
+  }, [dispatch]);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
 
-  
-  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -86,21 +131,22 @@ const RestaurantScreen = () => {
         </View>
         <View className="mb-15">
           <Text className="p-4 pt-6 font-bold text-xl">Menu</Text>
-          {/* Dish Row */}
-          <DishRow />
-          <DishRow />
-          <DishRow />
-          <DishRow />
-          {/* {dishes.map((dish) => (
-            <DishRow key={dish.id} id={dish._id} name={dish.name} description={dish.short_description}
-            price={dish.price} image={dish.image} />
-          ))} */}
+          {dishes.map((dish) => (
+            <DishRow
+              key={dish.id}
+              id={dish._id}
+              name={dish.name}
+              description={dish.short_description}
+              price={dish.price}
+              image={dish.image}
+            />
+          ))}
         </View>
       </ScrollView>
-      <BasketBar />
+      {items.length > 0 && <BasketBar />}
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -108,4 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RestaurantScreen
+export default RestaurantScreen;
