@@ -1,11 +1,11 @@
 {
   "root": true,
-  "project": {
-    "name": "deliveroo2.0"
-  },
   "api": {
     "projectId": "0udjkwam",
     "dataset": "production"
+  },
+  "project": {
+    "name": "deliveroo2.0"
   },
   "plugins": [
     "@sanity/base",

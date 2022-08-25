@@ -12,6 +12,7 @@ import { XCircleIcon } from "react-native-heroicons/solid";
 import { SafeAreaView, StyleSheet, StatusBar, Image } from "react-native";
 import { urlFor } from "../sanity";
 import Currency from "react-currency-formatter";
+
 const BasketScreen = () => {
   const restaurant = useSelector(selectRestaurant);
   const navigation = useNavigation();
