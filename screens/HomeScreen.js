@@ -12,7 +12,6 @@ import React, { useEffect, useLayoutEffect } from "react";
 import {
   UserIcon,
   ChevronDownIcon,
-  SearchIcon,
 } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import { Svg, Path } from "react-native-svg";
