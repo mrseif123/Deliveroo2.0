@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
+    "@reduxjs/toolkit": "^1.8.5",
     "@rneui/base": "^4.0.0-rc.6",
     "@rneui/themed": "^4.0.0-rc.6",
     "@sanity/client": "^3.3.3",
@@ -32,6 +33,7 @@
     "react-native-svg": "^11.0.1",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.7",
+    "react-redux": "^8.0.2",
     "styled-components": "^5.3.5",
     "styled-components-native": "^1.0.2",
     "tailwindcss-react-native": "^1.7.10"

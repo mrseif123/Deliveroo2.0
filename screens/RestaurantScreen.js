@@ -7,6 +7,7 @@ import { ArrowLeftIcon, StarIcon, ChevronRightIcon } from "react-native-heroicon
 import {QuestionMarkCircleIcon} from "react-native-heroicons/outline";
 import { Svg, Path } from "react-native-svg";
 import DishRow from "../components/DishRow";
+import  BasketBar  from "../components/BasketBar";
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
@@ -83,27 +84,20 @@ const RestaurantScreen = () => {
             <ChevronRightIcon color="#00ccbb" />
           </TouchableOpacity>
         </View>
-        <View>
+        <View className="mb-15">
           <Text className="p-4 pt-6 font-bold text-xl">Menu</Text>
           {/* Dish Row */}
-          <DishRow
-
-          />
-          <DishRow
-
-          />
-          <DishRow
-
-          />
-          <DishRow
-
-          />
+          <DishRow />
+          <DishRow />
+          <DishRow />
+          <DishRow />
           {/* {dishes.map((dish) => (
             <DishRow key={dish.id} id={dish._id} name={dish.name} description={dish.short_description}
             price={dish.price} image={dish.image} />
           ))} */}
         </View>
       </ScrollView>
+      <BasketBar />
     </SafeAreaView>
   );
 }

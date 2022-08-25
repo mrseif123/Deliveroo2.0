@@ -1,17 +1,32 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import React from "react";
 import Currency from "react-currency-formatter";
-import { urlFor } from '../sanity';
-import { MinusCircleIcon, PlusCircleIcon } from 'react-native-heroicons/solid';
-const DishRow = ({
-  id, name, description, price, image
-}) => {
-    const [isPressed, setIsPressed] = React.useState();
-   name = "Peri Pero Nuts"
-   description = "Crumchu almonds, cashews and macdamia nuts in a fiery Peri"
-   price=4.99
+import { urlFor } from "../sanity";
+import { MinusCircleIcon, PlusCircleIcon } from "react-native-heroicons/solid";
+import {
+  addToBasket,
+  basketItems,
+  removeFromBasket,
+} from "../features/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-   
+const DishRow = ({ id, name, description, price, image }) => {
+  name = "Peri Pero Nuts";
+  description = "Crumchu almonds, cashews and macdamia nuts in a fiery Peri";
+  price = 4.99;
+  id = 1
+
+  const [isPressed, setIsPressed] = React.useState(false);
+  const dispatch = useDispatch();
+  const items = useSelector(basketItems);
+  const addItem = () => {
+    dispatch(addToBasket({ id, name, description, price, image }));
+    
+  };
+  const removeItem = () => {
+    dispatch(removeFromBasket({ id, name, description, price, image }));
+
+  };
   return (
     <>
       <TouchableOpacity
@@ -44,11 +59,13 @@ const DishRow = ({
       {isPressed && (
         <View className="bg-white px-4">
           <View className="flex-row items-center space-x-2 pb-3">
-            <TouchableOpacity>
-              <MinusCircleIcon color="#00ccbb" size={40} />
+            <TouchableOpacity disabled={!items.length} onPress={removeItem}>
+              <MinusCircleIcon color={items.length > 0 ? "#00ccbb": "grey"} size={40} />
             </TouchableOpacity>
-            <Text>0</Text>
-            <TouchableOpacity>
+
+            <Text>{items.length}</Text>
+
+            <TouchableOpacity onPress={addItem}>
               <PlusCircleIcon color="#00ccbb" size={40} />
             </TouchableOpacity>
           </View>
@@ -56,6 +73,6 @@ const DishRow = ({
       )}
     </>
   );
-}
+};
 
-export default DishRow
+export default DishRow;
