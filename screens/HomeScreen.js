@@ -8,17 +8,16 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+
 import React, { useEffect, useLayoutEffect } from "react";
-import {
-  UserIcon,
-  ChevronDownIcon,
-} from "react-native-heroicons/outline";
+import { UserIcon, ChevronDownIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import { Svg, Path } from "react-native-svg";
-import { Searchbar, TextInput } from "react-native-paper";
+import { TextInput } from "react-native";
 import Categories from "../components/Categories";
 import { FeaturedRow } from "../components/FeaturedRow";
 import { client } from "../sanity";
+// import { SearchIcon } from "react-native-heroicons/solid";
 
 function HomeScreen() {
   const [featuredCategories, setFeaturedCategories] = React.useState([]);
@@ -31,8 +30,8 @@ function HomeScreen() {
 
   useEffect(() => {
     client
-            .fetch(
-              `
+      .fetch(
+        `
           *[_type == "featured"]{
             ...,
             restaurants[]->{
@@ -64,12 +63,28 @@ function HomeScreen() {
         <UserIcon size={34} color="#00CCBB" />
       </View>
       {/* Search Bar */}
-      <View className="flex-row items-center space-x-2 pb-2 mx-2 px-2 ">
-        <View className="flex-row flex-1 space-x-2 bg-white-200 p-3">
-          <Searchbar
+      <View className="flex-row items-center space-x-2 pb-2 mx-4 px-4 ">
+        <View className="flex-row flex-1 space-x-2 bg-gray-200 p-3">
+          <Svg
+            color="grey"
+            size={20}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <Path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </Svg>
+
+          <TextInput
             placeholder="Restaurnats & Cusinese"
-            className="bg-grey flex-1"
-            iconColor="grey"
+            keyboardType="default"
           />
         </View>
         <Svg
@@ -87,6 +102,7 @@ function HomeScreen() {
           />
         </Svg>
       </View>
+
       <ScrollView
         className="bg-gray-100"
         contentContainerStyle={{ paddingBottom: 100 }}
