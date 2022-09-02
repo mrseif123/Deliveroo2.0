@@ -17,7 +17,6 @@ import { TextInput } from "react-native";
 import Categories from "../components/Categories";
 import { FeaturedRow } from "../components/FeaturedRow";
 import { client } from "../sanity";
-// import { SearchIcon } from "react-native-heroicons/solid";
 
 function HomeScreen() {
   const [featuredCategories, setFeaturedCategories] = React.useState([]);
@@ -51,7 +50,7 @@ function HomeScreen() {
       <View className="flex-row pb-3 items-center mx-4 space-x-2 px-4">
         <Image
           source={{ uri: "https://links.papareact.com/wru" }}
-          className="he-7 w-7 bg-gray-300 rounded-full p-4"
+          className="h-7 w-7 bg-gray-300 rounded-full p-4"
         />
         <View className="flex-1">
           <Text className="font-bold text-gray-400 text-xs">Deliver Now!</Text>
@@ -114,7 +113,7 @@ function HomeScreen() {
         {featuredCategories?.map((category, index) => {
           return (
             <FeaturedRow
-              key={category.id}
+              key={`${category.id}-${index}`}
               id={category._id}
               title={category.name}
               description={category.short_description}

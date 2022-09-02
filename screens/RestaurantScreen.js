@@ -45,6 +45,8 @@ const RestaurantScreen = () => {
   const items = useSelector(basketItems);
 
   useEffect(() => {
+    console.log(imgUrl);
+    console.log(urlFor(imgUrl.asset._ref).url());
     dispatch(
       setRestaurant({
         id,
