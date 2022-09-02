@@ -17,7 +17,7 @@ const DeliveryScreen = () => {
   const restaurant = useSelector(selectRestaurant);
   return (
     <View className="bg-[#00ccbb] flex-1 ">
-      <SafeAreaView clasName="z-10">
+      <SafeAreaView className="z-10">
         <View className="flex-row justify-between items-center p-5 ">
           <TouchableOpacity onPress={() => navigation.navigate("Home")}>
             <XCircleIcon color="white" size={30} />

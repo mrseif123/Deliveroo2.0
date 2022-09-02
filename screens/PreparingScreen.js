@@ -4,6 +4,8 @@ import * as Animatable from "react-native-animatable";
 import * as Progress from "react-native-progress";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
+import AwesomeLoading from "react-native-awesome-loading";
+
 const PreparingScreen = () => {
   const navigation = useNavigation();
   useEffect(() => {
@@ -22,11 +24,11 @@ const PreparingScreen = () => {
       {/* <LottieView source={require("../assets/anim.json")} autoPlay /> */}
       <Animatable.Text
         animation="slideInUp"
-        className="text-lg my-10 text-white font-bold text-center"
+        className="text-lg my-10 px-3 text-white font-bold text-center"
       >
-        Waiting for Restaurant to accept your order...
+        Waiting for order acceptance...
       </Animatable.Text>
-      <Progress.Circle size={60} indeterminate={true} color="white" />
+      <Progress.Bar size={30} color="white" indeterminate={true} />
     </View>
   );
 };

@@ -17,16 +17,26 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "packagerOpts": { "config": "metro.config.js", "sourceExts": [ "js","jsx","svg","ts","tsx"] },
-
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "js",
+        "jsx",
+        "svg",
+        "ts",
+        "tsx"
+      ]
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mrseif123.deliverooclone"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#00ccbb"
-      }
+      },
+      "package": "com.mrseif123.deliverooclone"
     },
     "web": {
       "favicon": "./assets/favicon.png"

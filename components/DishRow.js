@@ -44,7 +44,6 @@ const DishRow = ({ id, name, description, price, image }) => {
               className="h-20 w-20 bg-gray-300"
               source={{
                 uri: urlFor(image.asset._ref).url(),
-                // uri: "https://links.papareact.com/gn7",
               }}
             />
           </View>
